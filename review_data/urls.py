@@ -11,5 +11,6 @@ from review_data.views import index,generic
 urlpatterns = [
     url(r'^$', views.index, name = 'index'),
     url(r'^movie/(?P<no>\d+)/$', views.generic, name = 'generic'),
-    #url(r'^$', views.elements, name = 'elements'),
 ]
+
+urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)

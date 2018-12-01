@@ -4,7 +4,7 @@ import ast
 import os
 from io import BytesIO
 import json
-
+from mxvie import settings
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","mxvie.settings")
 import django
 django.setup()
@@ -113,10 +113,18 @@ if __name__ == '__main__':
         titleofmovie = get_movietitle(val)
         movie = Movie.objects.create(no=idx,title=titleofmovie,src=srcs,synp=synps)
         movie.save()
+        xindx = []
+        yindx = []
         for i,j in result: #i == contents, j = sentiments
             pos_val = j['pos']
             neg_val = j['neg']
             neu_val = j['neu']
             comp_val = j['compound']
+            sum = pos_val - neg_val
+            xindx.append(sum)
+            yindx.append(comp_val)
             review = Review.objects.create(movie=movie, contents=i, sentiments = j, sentiments_pos=pos_val, sentiments_neg=neg_val, sentiments_neu=neu_val, sentiments_comp=comp_val)
             review.save()
+        sns.jointplot(x=xindx,y=yindx,kind='hex')
+        path = os.path.join(settings.MEDIA_ROOT, '{}'.format(idx))
+        plt.savefig(path)

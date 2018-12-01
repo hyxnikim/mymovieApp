@@ -36,10 +36,6 @@
 						<h2>Menu</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li><a href="generic.html">Ipsum veroeros</a></li>
-							<li><a href="generic.html">Tempus etiam</a></li>
-							<li><a href="generic.html">Consequat dolor</a></li>
-							<li><a href="elements.html">Elements</a></li>
 						</ul>
 					</nav>
 
@@ -48,13 +44,11 @@
 					<div id="main">
 						<div class="inner">
 							<h1>{{movie.title}}</h1>
-							<!--
-							<span class="image main"><img src="{{movie.src}}" alt=""></span>
-						-->
+							<span class="image main"><img src="/media/{{movie.no}}.png" alt=""></span>
 							<p>{{movie.synp}}</p>
 							{% for review in review %}
-								<p>{{review.contents}} : {{review.sentiments}}
-								</p>
+								<h2>{{review.contents}}</h2>
+								<p>{{review.sentiments}}</p>
 							{% endfor %}
 							</div>
 					</div>
